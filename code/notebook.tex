@@ -1,0 +1,879 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{project2\_checkpoint-Copy1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{investigating-heat-transfer-as-a-function-of-volume}{%
+\section{Investigating Heat Transfer as a Function of
+Volume}\label{investigating-heat-transfer-as-a-function-of-volume}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Configure Jupyter so figures appear in the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Configure Jupyter to display the assigned value after an assignment}
+        \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+        
+        \PY{c+c1}{\PYZsh{} import functions from the modsim.py module}
+        \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \hypertarget{question}{%
+\subsection{Question}\label{question}}
+
+The phenomenon in question is a universal one - one that anyone who
+consumes hot beverages experiences on a regular occurrence: As a hot
+drink is being consumed, the liquid looses heat faster the less volume
+there is left. The resulting experience is a colder drink the faster it
+is consumed. Thus, we set out to answer the questions: 1. How can this
+relationship between changing volume and changing rate of temperature
+drop be qualitatively explained? 2. Can we predict the final temperature
+of a fluid at a given time based on its starting temperature, the
+temperature of its environment, the heat transfer coefficient specific
+to its container, the dimensions of the container (a rectangular prism
+with a square base), and its rate of change of volume (assumed to be
+constant)?
+
+\hypertarget{model}{%
+\section{Model}\label{model}}
+
+To answer these questions, we start with \(dTdt = -r * (T - T_e)\) where
+\(T_e\) is the temperature of the environment, and \(r\) is a constant
+that represents: \((h*A)/(C*m)\) where \(h\) is the heat transfer
+coefficient, \(A\) is the surface area of convection, \(C\) is the
+specific heat of water, and \(m\) is the mass of the water. Thus, \(r\)
+can be represented as a function of the volume of water. Some
+assumptions are made in our model: 1. The heat transfer is assumed to be
+constant over all surfaces of the container, which in the physical world
+isn't true: the heat transfer coefficient is different depending on
+whether the water is in contact with the air or with the walls of the
+container. Because the container we are modeling is a plastic container
+and therefore of low conductivity, we believe this is negligible. 2. The
+dimensions of the container: because the dimensions of the container
+must be defined to avoid a two-dimensional function, we reference the
+container used in the later experiment: a 0.13m x 0.13m x 0.05m plastic
+container. 3. The heat transfer constant: because the heat transfer
+constant is an empirically determined value, we chose the value of
+\texttt{h\ =\ 0.09} to match our mathematical model as close as possible
+to our empirical model (seen later in the essay). While this is an
+empirically-driven mathematical model, these values must be measured to
+achieve a two-dimensional result. Thus, our results are constrained to
+interpretation only in the context of our specific container, but the
+model is flexible enough to accommodate any container so long as the
+empirical information is supplied.
+
+The function that takes \texttt{V} as an argument and returns \(r\)
+(\texttt{r}) is shown below:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Function of r using math:}
+        \PY{k}{def} \PY{n+nf}{r\PYZus{}math}\PY{p}{(}\PY{n}{V}\PY{p}{)}\PY{p}{:}
+            \PY{n}{V} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{V}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{if} \PY{n}{V} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} size of box:}
+                \PY{n}{x} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{13}
+                
+                \PY{n}{mass} \PY{o}{=} \PY{n}{V}\PY{o}{*}\PY{l+m+mf}{0.001}
+        
+                \PY{c+c1}{\PYZsh{} heat transfer coefficient between air and water}
+                \PY{n}{h} \PY{o}{=} \PY{l+m+mf}{0.09}
+                \PY{c+c1}{\PYZsh{} heat capacity of water}
+                \PY{n}{C} \PY{o}{=} \PY{l+m+mf}{4.184}
+        
+                \PY{c+c1}{\PYZsh{} surface area as a function of volume (volume in the equation is in kiloliters, so it}
+                \PY{c+c1}{\PYZsh{} needs to be converted to milliliters)}
+                \PY{n}{SA} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{p}{(}\PY{n}{V}\PY{o}{*} \PY{l+m+mf}{0.000001}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{x}
+            
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{x} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{13}
+                \PY{n}{mass} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{001}
+                \PY{n}{h} \PY{o}{=} \PY{l+m+mf}{0.09}
+                \PY{n}{C} \PY{o}{=} \PY{l+m+mf}{4.184}
+                \PY{n}{SA} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{4} \PY{o}{*} \PY{p}{(}\PY{n}{V} \PY{o}{*} \PY{l+m+mf}{0.000001}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{x}
+            \PY{k}{return} \PY{p}{(}\PY{p}{(}\PY{n}{h}\PY{o}{*}\PY{n}{SA}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{C}\PY{o}{*}\PY{n}{mass}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Visualizing r\PYZus{}math:}
+        \PY{n}{listv} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{listr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{V} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{700}\PY{p}{)}\PY{p}{:}
+            \PY{n}{listv}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{V}\PY{p}{)}
+            \PY{n}{listr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r\PYZus{}math}\PY{p}{(}\PY{n}{V}\PY{p}{)}\PY{p}{)}
+            
+        \PY{n}{plot}\PY{p}{(}\PY{n}{listv}\PY{p}{,} \PY{n}{listr}\PY{p}{)}
+        \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume (mL)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mathematical Function of r vs Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    When using dTdt to update the temperature stock of the water, instead of
+passing in \(r\) as a constant, it is passed in as \texttt{r\_math}
+evaluated at the volume (\texttt{V}) at the given time step. The volume
+too doesn't remain constant because it is being swept; the volume is
+passed in by \texttt{dvdt}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}func}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{r\PYZus{}math}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Update the thermal transfer model.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    State objects:}
+        \PY{l+s+sd}{    Temperature of vessle}
+        \PY{l+s+sd}{    Volume of vessle}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    t \PYZhy{}\PYZhy{}\PYZgt{} time}
+        \PY{l+s+sd}{    T \PYZhy{}\PYZhy{}\PYZgt{} Temperature}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    returns: State object containing the stocks}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+            
+            \PY{n}{T} \PY{o}{=} \PY{n}{state}\PY{o}{.}\PY{n}{T}
+            \PY{n}{V} \PY{o}{=} \PY{n}{state}\PY{o}{.}\PY{n}{V}
+            
+            \PY{n}{r} \PY{o}{=} \PY{n}{r\PYZus{}math}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{V}\PY{p}{)}
+                
+            \PY{n}{dTdt} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{r} \PY{o}{*} \PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{T\PYZus{}env}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} dvdt is passed in as an argument \PYZhy{} it is being swept}
+        
+            \PY{k}{if}\PY{p}{(}\PY{n}{V}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{T} \PY{o}{\PYZgt{}}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{:}
+                \PY{n}{T} \PY{o}{+}\PY{o}{=} \PY{n}{dTdt} \PY{o}{*} \PY{n}{dt}
+                \PY{n}{V} \PY{o}{+}\PY{o}{=} \PY{n}{dvdt} \PY{o}{*} \PY{n}{dt}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{V} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{T} \PY{o}{=} \PY{k+kc}{None}
+            \PY{k}{return} \PY{n}{State}\PY{p}{(}\PY{n}{T}\PY{o}{=}\PY{n}{T}\PY{p}{,} \PY{n}{V}\PY{o}{=}\PY{n}{V}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{r\PYZus{}math}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Runs a simulation of the system.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Add a TimeFrame to the System: results}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+            
+            \PY{n}{frame} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{init}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+            \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{init}
+            \PY{n}{ts} \PY{o}{=} \PY{n}{linrange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t\PYZus{}end}\PY{p}{,} \PY{n}{dt}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{ts}\PY{p}{:}
+                \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{n}{dt}\PY{p}{]} \PY{o}{=} \PY{n}{update\PYZus{}func}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{r\PYZus{}math}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{} store the final temperature in T\PYZus{}final}
+            \PY{n}{system}\PY{o}{.}\PY{n}{T\PYZus{}final} \PY{o}{=} \PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{frame}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}system}\PY{p}{(}\PY{n}{T\PYZus{}init}\PY{p}{,} \PY{n}{V\PYZus{}init}\PY{p}{,} \PY{n}{dvdt}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Makes a System object with the given parameters.}
+        
+        \PY{l+s+sd}{    T\PYZus{}init: initial temperature in degC}
+        \PY{l+s+sd}{    r: heat transfer rate \PYZhy{} when run, a function of r will be substituted in for it}
+        \PY{l+s+sd}{    t\PYZus{}end: end time of simulation}
+        \PY{l+s+sd}{    T\PYZus{}env: temperature of the environment}
+        \PY{l+s+sd}{    dt: time step}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    returns: System object}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{init} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{T}\PY{o}{=}\PY{n}{T\PYZus{}init}\PY{p}{,} \PY{n}{V}\PY{o}{=}\PY{n}{V\PYZus{}init}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} T\PYZus{}final is used to store the final temperature.}
+            \PY{c+c1}{\PYZsh{} Before the simulation runs, T\PYZus{}final = T\PYZus{}init}
+            \PY{c+c1}{\PYZsh{} We do the same thing for Volume}
+            \PY{n}{T\PYZus{}final} \PY{o}{=} \PY{n}{T\PYZus{}init}
+            \PY{n}{V\PYZus{}final} \PY{o}{=} \PY{n}{V\PYZus{}init}
+            
+            \PY{n}{T\PYZus{}env} \PY{o}{=} \PY{l+m+mi}{25}
+            \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{c+c1}{\PYZsh{} n\PYZus{}sweep stands for number of sweeps that the model will perform}
+            \PY{n}{n\PYZus{}sweep} \PY{o}{=} \PY{l+m+mi}{9}
+            
+            \PY{c+c1}{\PYZsh{} n\PYZus{}sec stands for number of seconds that the simulation will be run for}
+            \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{l+m+mi}{600}
+            
+            \PY{c+c1}{\PYZsh{} Used at the end of this simulation, this is the threshold that determines}
+            \PY{c+c1}{\PYZsh{} what rates of volume change over a given time period will result in a }
+            \PY{c+c1}{\PYZsh{} temperature at or over 40 degrees celcius.}
+            \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp} \PY{o}{=} \PY{l+m+mi}{40}
+            
+            \PY{k}{return} \PY{n}{System}\PY{p}{(}\PY{n+nb}{locals}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{system} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{l+m+mi}{85}\PY{p}{,} \PY{l+m+mi}{700}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{sweepdVdt}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sweep} \PY{o}{=} \PY{n}{SweepSeries}\PY{p}{(}\PY{p}{)}
+            \PY{n}{dvdt\PYZus{}range} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}\PY{p}{:}
+                \PY{n}{dvdt} \PY{o}{=} \PY{n}{dvdt\PYZus{}range}\PY{p}{[}\PY{n}{t}\PY{p}{]}
+                \PY{n}{sweep}\PY{p}{[}\PY{n}{t}\PY{p}{]} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{r\PYZus{}math}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{sweep}
+        
+        \PY{n}{swept} \PY{o}{=} \PY{n}{sweepdVdt}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \hypertarget{qualitative-result-of-mathematical-model}{%
+\subsubsection{Qualitative Result of Mathematical
+Model:}\label{qualitative-result-of-mathematical-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{dvdt\PYZus{}range} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}\PY{p}{;}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dvdt} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{swept}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{swept}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{dvdt}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ mL/sec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                    \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature (degrees C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                    \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature of Coffee as Volume Decreases over }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ seconds}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{1.05}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The qualitative result appears to validate our experiences with
+consuming hot liquids: the higher the rate of change of volume, the
+quicker the drop in temperature. However, because this is a mathematical
+model, when the volume is infinitely small, an infinite slope of
+temperature over time results. This is not something that is observed in
+the physical world, and is a shortcoming of the mathematical model.
+
+    \hypertarget{quantitative-result-of-mathematical-model}{%
+\subsubsection{Quantitative Result of Mathematical
+Model}\label{quantitative-result-of-mathematical-model}}
+
+The final temperatures of each \texttt{dvdt} sweep are plotted below,
+along with a ``Minimum Acceptable Temperature.'' The following code
+exists to extract those final temperatures, and the ``Minimum Acceptable
+Temperature'' represents an arbitrary threshold that can be set to
+determine what rates of change of volume will yield a desired
+temperature. It is important to note that the following results are
+specific to not only the container used for the experiment, but also the
+600 second time frame that is modeled.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Creating the time series in which the last temperatures from each dVdt sweep will be stored.}
+        \PY{n}{last\PYZus{}temp} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{determine\PYZus{}last\PYZus{}temp}\PY{p}{(}\PY{n}{last\PYZus{}temp}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{swept}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Selecting the last values from each sweep by selecting the temperature associated with the point }
+            \PY{c+c1}{\PYZsh{} at which the volume first hits 0 mL. If the volume never reaches 0, the last temperature is still selected. }
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{swept}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{V}\PY{p}{[}\PY{n}{t}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{t} \PY{o}{==} \PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{last\PYZus{}temp}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{swept}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                        \PY{k}{break}
+            \PY{k}{return} \PY{n}{last\PYZus{}temp}
+        
+        \PY{n}{last\PYZus{}temp} \PY{o}{=} \PY{n}{determine\PYZus{}last\PYZus{}temp}\PY{p}{(}\PY{n}{last\PYZus{}temp}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{swept}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} To plot the data against dVdt and not against the sweep numbers, the dvdt values and last temperature}
+        \PY{c+c1}{\PYZsh{} values will be converted into lists and then plotted against each other.}
+        \PY{n}{dvdt\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{last\PYZus{}temp\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dvdt\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{last\PYZus{}temp\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{last\PYZus{}temp}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}final\PYZus{}temp\PYZus{}and\PYZus{}minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{last\PYZus{}temp\PYZus{}list}\PY{p}{,} \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{last\PYZus{}temp\PYZus{}list}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Temperature of Coffee}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} The minimum acceptable temperature will be plotted as a line. To achieve this, a list of length }
+            \PY{c+c1}{\PYZsh{} len(dvdt\PYZus{}range) will created and contain the minimum acceptable temperature in each index. }
+            \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Minimum Acceptable Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}
+        
+        \PY{n}{plot\PYZus{}final\PYZus{}temp\PYZus{}and\PYZus{}minimum\PYZus{}acceptable\PYZus{}temp} \PY{o}{=} \PY{n}{plot\PYZus{}final\PYZus{}temp\PYZus{}and\PYZus{}minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{last\PYZus{}temp\PYZus{}list}\PY{p}{,} 
+                                                                                                  \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{)}
+        \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dVdt (mL/sec)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                 \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Temperature (degrees C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final temperature of coffee after }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ seconds}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This graph illustrates that, given enough parameters/information about a
+specific container, the final temperature can be predicted based on the
+rate of change of volume of the container. A minimum is expected to
+occur approximately dVdt = -2 because that indicates a cusp at which the
+container will either have zero or nonzero volume remaining (to the
+right and left of the cusp respectively). However, the graph is likely
+inaccurate because it exhibits an odd behavior: a local minimum and
+maximum occur between -4 \textless{} dVdt \textless{} -3. There is no
+reason to suggest that this phenomenon should occur, as the relationship
+between volume and r does not exhibit any inflection points. A likely
+explanation for this shortcoming are the infinite slopes that exist in
+the temperature vs.~time graphs when volume approaches 0, which may
+result in inaccurate readings at the extremities of the graphs. This
+mathematical model will be further analyzed in comparison to the
+following empirical model.
+
+    \hypertarget{validation-of-mathematical-model---repeating-model-using-empirical-data}{%
+\section{Validation of Mathematical Model - Repeating Model using
+Empirical
+Data}\label{validation-of-mathematical-model---repeating-model-using-empirical-data}}
+
+    In order to empirically obtain a graph of the heat transfer coefficient
+as a function of volume, we obtained a series of empirically determined
+r values (specific to the container used in the experiments) at
+different volumes. Eleven different volumes in total were used, and to
+calculate the r value, the following procedure was used: 1. Set up
+experiment: connect a thermistor to a breadboard such that it is the
+second resistor in the voltage divider. The voltage divider must be
+connected to a 5V power supply and ground, and the first resistor must
+have a resistance of 1k-ohm. Measure the voltage drop across the voltage
+divider.\\
+2. Bring water to near-boiling temperature. 3. Pour water into container
+on a scale until the desired mass/volume of water is achieved 4. Insert
+the thermistor into the water. 5. Record the starting voltage, as well
+as the voltage after 5 minutes. 6. Convert the voltage to temperature
+using the following equation: T = (ln(5/Voltage - 1)/3528 + 1/298)\^{}-1
+- 273 7. Calculate an r value using the following equation: r = 1/t\_end
+* log((T\_init - T\_env)/(T\_end - T\_env)) 8. Repeat steps 2-7 for as
+many volumes are desired.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} A list of the data collected in our experiments. Each volume has a corresponding calculated r value}
+         \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{118.354}\PY{p}{,} \PY{l+m+mf}{169.507}\PY{p}{,}\PY{l+m+mf}{202.606}\PY{p}{,}\PY{l+m+mf}{258.774}\PY{p}{,}\PY{l+m+mf}{316.948}\PY{p}{,}\PY{l+m+mf}{377.128}\PY{p}{,}\PY{l+m+mf}{401.2}\PY{p}{,}\PY{l+m+mf}{458.371}\PY{p}{,}\PY{l+m+mf}{551.65}\PY{p}{,}\PY{l+m+mf}{654.959}\PY{p}{,}\PY{l+m+mf}{714.136}\PY{p}{,}\PY{p}{]}\PY{p}{,} 
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.007660215}\PY{p}{,}\PY{l+m+mf}{0.00563342}\PY{p}{,}\PY{l+m+mf}{0.004614561}\PY{p}{,}\PY{l+m+mf}{0.003912183}\PY{p}{,}\PY{l+m+mf}{0.003744291}\PY{p}{,}\PY{l+m+mf}{0.003259004}\PY{p}{,}\PY{l+m+mf}{0.002769218}\PY{p}{,}
+                            \PY{l+m+mf}{0.002814454}\PY{p}{,}\PY{l+m+mf}{0.002157224}\PY{p}{,}\PY{l+m+mf}{0.001998175}\PY{p}{,}\PY{l+m+mf}{0.001906878}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{} Creating a DataFrame from our collected data:}
+         \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{plot}\PY{p}{(}\PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume (mL)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emperical r (sec\PYZca{}\PYZhy{}1)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Collected Data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{finding-a-curve-of-best-fit-for-the-data.}{%
+\subsubsection{Finding a curve of best fit for the
+data.}\label{finding-a-curve-of-best-fit-for-the-data.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} In order to find a best fit curve, we first linearize the data in data2, then create r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data }
+         \PY{c+c1}{\PYZsh{} as the DataFrame that contains the linearized data.}
+         \PY{n}{data2} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transformed r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1} \PY{o}{/} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data2}\PY{p}{)}\PY{p}{;}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Code for plotting the results of the above:}
+         
+         \PY{c+c1}{\PYZsh{}plot(r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data[\PYZsq{}Volume\PYZsq{}], r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data[\PYZsq{}Transformed r\PYZsq{}], \PYZsq{}*\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}decorate(xlabel = \PYZsq{}Volume (mL)\PYZsq{}, ylabel = \PYZsq{}Linearized r (sec)\PYZsq{}, title = \PYZdq{}Experimental Data: Linearized r vs. Volume\PYZdq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Calculate a linear best fit line for the transformed data}
+         \PY{n}{x} \PY{o}{=} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transformed r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{r\PYZus{}value}\PY{p}{,} \PY{n}{p\PYZus{}value}\PY{p}{,} \PY{n}{std\PYZus{}err} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{linregress}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Create the line from calculated slope and intercept}
+         \PY{k}{def} \PY{n+nf}{r\PYZus{}linear\PYZus{}function}\PY{p}{(}\PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{volume}\PY{p}{)}\PY{p}{:}
+             \PY{n}{r} \PY{o}{=} \PY{n}{slope} \PY{o}{*} \PY{n}{volume} \PY{o}{+} \PY{n}{intercept}
+             \PY{k}{return} \PY{n}{r}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Code for plotting the results of the above:}
+         
+         \PY{c+c1}{\PYZsh{}r\PYZus{}plot = r\PYZus{}linear\PYZus{}function(slope, intercept, r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data[\PYZsq{}Volume\PYZsq{}])}
+         
+         \PY{c+c1}{\PYZsh{}def plot\PYZus{}linear\PYZus{}on\PYZus{}data(r\PYZus{}plot):}
+         \PY{c+c1}{\PYZsh{}    plot(r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data[\PYZsq{}Volume\PYZsq{}], r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data[\PYZsq{}Transformed r\PYZsq{}], \PYZsq{}*\PYZsq{}, label = \PYZdq{}Data\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}    plot(r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data[\PYZsq{}Volume\PYZsq{}], r\PYZus{}plot, label = \PYZdq{}Line of Best Fit\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}    decorate(xlabel = \PYZsq{}Volume (mL)\PYZsq{}, ylabel = \PYZsq{}Linearized r\PYZsq{}, title = \PYZdq{}Line of Best fit with Linearized Data\PYZdq{})  }
+         \PY{c+c1}{\PYZsh{}plot\PYZus{}linear\PYZus{}on\PYZus{}data(r\PYZus{}plot)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} De\PYZhy{}linearizes the data and the line of best fit to give the best fit curve, returns the curve:}
+         \PY{k}{def} \PY{n+nf}{unflipper}\PY{p}{(}\PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{volume}\PY{p}{)}\PY{p}{:}
+             \PY{n}{r} \PY{o}{=} \PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{(}\PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{volume}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{r}
+         
+         \PY{n}{r\PYZus{}nonlinear\PYZus{}function} \PY{o}{=} \PY{n}{unflipper}\PY{p}{(}\PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}transformed\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plots the curve of best fit with the data collected:}
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}nonlinear\PYZus{}on\PYZus{}data}\PY{p}{(}\PY{n}{r\PYZus{}nonlinear\PYZus{}function}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{r\PYZus{}vs\PYZus{}volume\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{r\PYZus{}nonlinear\PYZus{}function}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Curve of Best Fit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Volume (mL)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emperical r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Curve of Best fit for Collected data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}nonlinear\PYZus{}on\PYZus{}data}\PY{p}{(}\PY{n}{r\PYZus{}nonlinear\PYZus{}function}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This curve closely resembles the mathematical one defined earlier, both
+in shape and in values - as it should, considering that the mathematical
+model was calibrated to match this function.
+
+    \hypertarget{qualitative-result-of-empirical-model}{%
+\subsubsection{Qualitative Result of Empirical
+Model}\label{qualitative-result-of-empirical-model}}
+
+Now, the simulation is run again with the empirically determined r as a
+function of volume replacing the mathematical one:
+
+\emph{Note: The code will be blocked into one cell because it is a
+identical repeat of the previously used code, with the exception of
+\texttt{unflipper} replacing \texttt{r\_math} and adding in the
+additional function arguments as necessary.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}func2}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{unflipper}\PY{p}{,} \PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{)}\PY{p}{:}
+             \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+             
+             \PY{n}{T} \PY{o}{=} \PY{n}{state}\PY{o}{.}\PY{n}{T}
+             \PY{n}{V} \PY{o}{=} \PY{n}{state}\PY{o}{.}\PY{n}{V}
+             
+             \PY{c+c1}{\PYZsh{} Empirically determined function of r vs. V}
+             \PY{n}{r} \PY{o}{=} \PY{n}{unflipper}\PY{p}{(}\PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{,} \PY{n}{state}\PY{o}{.}\PY{n}{V}\PY{p}{)}
+                 
+             \PY{n}{dTdt} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{r} \PY{o}{*} \PY{p}{(}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{T\PYZus{}env}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} dvdt is passed in as an argument \PYZhy{} it is being swept}
+         
+             \PY{k}{if}\PY{p}{(}\PY{n}{V}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{T} \PY{o}{\PYZgt{}}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{T} \PY{o}{+}\PY{o}{=} \PY{n}{dTdt} \PY{o}{*} \PY{n}{dt}
+                 \PY{n}{V} \PY{o}{+}\PY{o}{=} \PY{n}{dvdt} \PY{o}{*} \PY{n}{dt}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{V} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{T} \PY{o}{=} \PY{k+kc}{None}
+             \PY{k}{return} \PY{n}{State}\PY{p}{(}\PY{n}{T}\PY{o}{=}\PY{n}{T}\PY{p}{,} \PY{n}{V}\PY{o}{=}\PY{n}{V}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation2}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func2}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{unflipper}\PY{p}{,} \PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{)}\PY{p}{:}
+             \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+             
+             \PY{n}{frame} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{init}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+             \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{init}
+             \PY{n}{ts} \PY{o}{=} \PY{n}{linrange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t\PYZus{}end}\PY{p}{,} \PY{n}{dt}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{ts}\PY{p}{:}
+                 \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{n}{dt}\PY{p}{]} \PY{o}{=} \PY{n}{update\PYZus{}func2}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{unflipper}\PY{p}{,} \PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{} store the final temperature in T\PYZus{}final}
+             \PY{n}{system}\PY{o}{.}\PY{n}{T\PYZus{}final} \PY{o}{=} \PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{frame}
+         
+         \PY{k}{def} \PY{n+nf}{sweepdVdt\PYZus{}empirical}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sweep2} \PY{o}{=} \PY{n}{SweepSeries}\PY{p}{(}\PY{p}{)}
+             \PY{n}{dvdt\PYZus{}range} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{dvdt} \PY{o}{=} \PY{n}{dvdt\PYZus{}range}\PY{p}{[}\PY{n}{t}\PY{p}{]}
+                 \PY{n}{sweep2}\PY{p}{[}\PY{n}{t}\PY{p}{]} \PY{o}{=} \PY{n}{run\PYZus{}simulation2}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func2}\PY{p}{,} \PY{n}{dvdt}\PY{p}{,} \PY{n}{unflipper}\PY{p}{,} \PY{n}{r\PYZus{}linear\PYZus{}function}\PY{p}{,} \PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{sweep2}
+         
+         \PY{n}{swept2} \PY{o}{=} \PY{n}{sweepdVdt\PYZus{}empirical}\PY{p}{(}\PY{n}{system}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{dvdt\PYZus{}range} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}\PY{p}{;}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dvdt} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{swept}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{swept2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{dvdt}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ mL/sec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature (C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Empirical Model: Temperature of Coffee as Volume Decreases...}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mf}{1.05}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Analysis of qualitative result\ldots{}
+
+    \hypertarget{quantitative-result-of-empirical-model}{%
+\subsubsection{Quantitative Result of Empirical
+Model}\label{quantitative-result-of-empirical-model}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Creating the time series in which the last temperatures from each dVdt sweep will be stored.}
+         \PY{n}{last\PYZus{}temp2} \PY{o}{=} \PY{n}{TimeSeries}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{determine\PYZus{}last\PYZus{}temp}\PY{p}{(}\PY{n}{last\PYZus{}temp}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{swept2}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Selecting the last values from each sweep by selecting the temperature associated with the point }
+             \PY{c+c1}{\PYZsh{} at which the volume first hits 0 mL. If the volume never reaches 0, the last temperature is still selected. }
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{n\PYZus{}sweep}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{swept2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{V}\PY{p}{[}\PY{n}{t}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{t} \PY{o}{==} \PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{last\PYZus{}temp}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{swept2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                         \PY{k}{break}
+             \PY{k}{return} \PY{n}{last\PYZus{}temp}
+         
+         \PY{n}{last\PYZus{}temp} \PY{o}{=} \PY{n}{determine\PYZus{}last\PYZus{}temp}\PY{p}{(}\PY{n}{last\PYZus{}temp2}\PY{p}{,} \PY{n}{system}\PY{p}{,} \PY{n}{swept2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} To plot the data against dVdt and not against the sweep numbers, the dvdt values and last temperature}
+         \PY{c+c1}{\PYZsh{} values will be converted into lists and then plotted against each other.}
+         \PY{n}{dvdt\PYZus{}list2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{last\PYZus{}temp\PYZus{}list2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dvdt\PYZus{}list2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{last\PYZus{}temp\PYZus{}list2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{last\PYZus{}temp2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}final\PYZus{}temp\PYZus{}and\PYZus{}minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{last\PYZus{}temp\PYZus{}list2}\PY{p}{,} \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{last\PYZus{}temp\PYZus{}list2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Temperature of Coffee}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} The minimum acceptable temperature will be plotted as a line. To achieve this, a list of length }
+             \PY{c+c1}{\PYZsh{} len(dvdt\PYZus{}range) will created and contain the minimum acceptable temperature in each index. }
+             \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dvdt\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Minimum Acceptable Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp\PYZus{}list}
+         
+         \PY{n}{plot\PYZus{}final\PYZus{}temp\PYZus{}and\PYZus{}minimum\PYZus{}acceptable\PYZus{}temp} \PY{o}{=} \PY{n}{plot\PYZus{}final\PYZus{}temp\PYZus{}and\PYZus{}minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{(}\PY{n}{dvdt\PYZus{}list}\PY{p}{,} \PY{n}{last\PYZus{}temp\PYZus{}list2}\PY{p}{,} 
+                                                                                                   \PY{n}{minimum\PYZus{}acceptable\PYZus{}temp}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dVdt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Temperature (C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final temperature of coffee after }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ seconds}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{system}\PY{o}{.}\PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{interpretation}{%
+\section{Interpretation}\label{interpretation}}
+
+    insert interpretation
+
+    \hypertarget{abstract}{%
+\section{Abstract}\label{abstract}}
+
+    insert abstract
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
