@@ -77,24 +77,7 @@
    "cell_type": "code",
    "execution_count": 2,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "newton"
-      ],
-      "text/latex": [
-       "$newton$"
-      ],
-      "text/plain": [
-       "<Unit('newton')>"
-      ]
-     },
-     "execution_count": 2,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "m = UNITS.meter\n",
     "s = UNITS.second\n",
@@ -106,90 +89,7 @@
    "cell_type": "code",
    "execution_count": 3,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>values</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>v_init</th>\n",
-       "      <td>0.0 meter / second</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>g</th>\n",
-       "      <td>9.8 meter / second ** 2</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>M</th>\n",
-       "      <td>75 kilogram</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>m_cord</th>\n",
-       "      <td>75 kilogram</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>area</th>\n",
-       "      <td>1 meter ** 2</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>rho</th>\n",
-       "      <td>1.2 kilogram / meter ** 3</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>v_term</th>\n",
-       "      <td>60.0 meter / second</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>L</th>\n",
-       "      <td>25 meter</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>k</th>\n",
-       "      <td>40.0 newton / meter</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "v_init           0.0 meter / second\n",
-       "g           9.8 meter / second ** 2\n",
-       "M                       75 kilogram\n",
-       "m_cord                  75 kilogram\n",
-       "area                   1 meter ** 2\n",
-       "rho       1.2 kilogram / meter ** 3\n",
-       "v_term          60.0 meter / second\n",
-       "L                          25 meter\n",
-       "k               40.0 newton / meter\n",
-       "dtype: object"
-      ]
-     },
-     "execution_count": 3,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "params = Params(v_init = 0 * m / s,\n",
     "                g = 9.8 * m/s**2,\n",
@@ -250,112 +150,7 @@
    "cell_type": "code",
    "execution_count": 5,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "<div>\n",
-       "<style scoped>\n",
-       "    .dataframe tbody tr th:only-of-type {\n",
-       "        vertical-align: middle;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe tbody tr th {\n",
-       "        vertical-align: top;\n",
-       "    }\n",
-       "\n",
-       "    .dataframe thead th {\n",
-       "        text-align: right;\n",
-       "    }\n",
-       "</style>\n",
-       "<table border=\"1\" class=\"dataframe\">\n",
-       "  <thead>\n",
-       "    <tr style=\"text-align: right;\">\n",
-       "      <th></th>\n",
-       "      <th>values</th>\n",
-       "    </tr>\n",
-       "  </thead>\n",
-       "  <tbody>\n",
-       "    <tr>\n",
-       "      <th>v_init</th>\n",
-       "      <td>0.0 meter / second</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>g</th>\n",
-       "      <td>9.8 meter / second ** 2</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>M</th>\n",
-       "      <td>75 kilogram</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>m_cord</th>\n",
-       "      <td>75 kilogram</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>area</th>\n",
-       "      <td>1 meter ** 2</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>rho</th>\n",
-       "      <td>1.2 kilogram / meter ** 3</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>v_term</th>\n",
-       "      <td>60.0 meter / second</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>L</th>\n",
-       "      <td>25 meter</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>k</th>\n",
-       "      <td>40.0 newton / meter</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>C_d</th>\n",
-       "      <td>0.3402777777777778 dimensionless</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>mu</th>\n",
-       "      <td>1.0 dimensionless</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>init</th>\n",
-       "      <td>y               0 meter\n",
-       "v    0.0 meter / secon...</td>\n",
-       "    </tr>\n",
-       "    <tr>\n",
-       "      <th>t_end</th>\n",
-       "      <td>10 second</td>\n",
-       "    </tr>\n",
-       "  </tbody>\n",
-       "</table>\n",
-       "</div>"
-      ],
-      "text/plain": [
-       "v_init                                   0.0 meter / second\n",
-       "g                                   9.8 meter / second ** 2\n",
-       "M                                               75 kilogram\n",
-       "m_cord                                          75 kilogram\n",
-       "area                                           1 meter ** 2\n",
-       "rho                               1.2 kilogram / meter ** 3\n",
-       "v_term                                  60.0 meter / second\n",
-       "L                                                  25 meter\n",
-       "k                                       40.0 newton / meter\n",
-       "C_d                        0.3402777777777778 dimensionless\n",
-       "mu                                        1.0 dimensionless\n",
-       "init      y               0 meter\n",
-       "v    0.0 meter / secon...\n",
-       "t_end                                             10 second\n",
-       "dtype: object"
-      ]
-     },
-     "execution_count": 5,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "system = make_system(params)"
    ]
@@ -396,24 +191,7 @@
    "cell_type": "code",
    "execution_count": 7,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "-81.66666666666667 kilogram meter/second<sup>2</sup>"
-      ],
-      "text/latex": [
-       "$-81.66666666666667 \\frac{kilogram \\cdot meter}{second^{2}}$"
-      ],
-      "text/plain": [
-       "<Quantity(-81.66666666666667, 'kilogram * meter / second ** 2')>"
-      ]
-     },
-     "execution_count": 7,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "drag_force(20 * m/s, system)"
    ]
@@ -429,7 +207,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 8,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -442,14 +220,13 @@
     "    \n",
     "    returns: acceleration in m/s\n",
     "    \"\"\"\n",
-    "    unpack(system)\n",
-    "    a_cord = ((mu * v **2)/2) / (mu*(L + y) + 2*L)\n",
-    "    return a_cord"
+    "    # Fill this in\n",
+    "    return 0"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 9,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -465,26 +242,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 10,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/html": [
-       "3.6363636363636362 meter/second<sup>2</sup>"
-      ],
-      "text/latex": [
-       "$3.6363636363636362 \\frac{meter}{second^{2}}$"
-      ],
-      "text/plain": [
-       "<Quantity(3.6363636363636362, 'meter / second ** 2')>"
-      ]
-     },
-     "execution_count": 18,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "y = -20 * m\n",
     "v = -20 * m/s\n",
@@ -500,7 +260,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 11,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -517,7 +277,7 @@
     "    y, v = state\n",
     "    unpack(system)\n",
     "    \n",
-    "    dydt = v\n",
+    "    # Fill this in\n",
     "    dvdt = -g\n",
     "    \n",
     "    return v, dvdt"
@@ -525,7 +285,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 20,
+   "execution_count": 12,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -541,20 +301,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 21,
+   "execution_count": 13,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "(<Quantity(0.0, 'meter / second')>, <Quantity(-9.8, 'meter / second ** 2')>)"
-      ]
-     },
-     "execution_count": 21,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "slope_func1(system.init, 0, system)"
    ]
@@ -568,7 +317,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 25,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -585,12 +334,13 @@
     "    y, v = state\n",
     "    unpack(system)\n",
     "\n",
-    "    return y == L"
+    "    # Fill this in\n",
+    "    return 1"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 26,
+   "execution_count": 15,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -606,20 +356,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 27,
+   "execution_count": 16,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "False"
-      ]
-     },
-     "execution_count": 27,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "event_func(system.init, 0, system)"
    ]
@@ -633,20 +372,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 28,
+   "execution_count": 17,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "'A termination event occurred.'"
-      ]
-     },
-     "execution_count": 28,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "results, details = run_ode_solver(system, slope_func1, \n",
     "                                  events=event_func, max_step=0.1)\n",
@@ -662,20 +390,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 29,
+   "execution_count": 18,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "0.0"
-      ]
-     },
-     "execution_count": 29,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
+   "outputs": [],
    "source": [
     "t_final = get_last_label(results)"
    ]
@@ -689,20 +406,9 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 30,
+   "execution_count": 19,
    "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "image/png": "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\n",
-      "text/plain": [
-       "<Figure size 432x288 with 1 Axes>"
-      ]
-     },
-     "metadata": {},
-     "output_type": "display_data"
-    }
-   ],
+   "outputs": [],
    "source": [
     "def plot_position(results, **options):\n",
     "    plot(results.y, **options)\n",
